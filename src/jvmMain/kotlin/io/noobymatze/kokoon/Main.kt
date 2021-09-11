@@ -15,13 +15,13 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        val builder = Undertow.builder().addHttpListener(8080, "localhost", BlockingHandler {
+        val builder = Undertow.builder().addHttpListener(8080, "localhost", BlockingHandler(
             handle<Response> {
                 when (it) {
                     is Request.Hello -> Response.Hello("Hello ${it.name}")
                 }
-            }.handleRequest(it)
-        }).build()
+            }
+        )).build()
 
         builder.start()
     }
